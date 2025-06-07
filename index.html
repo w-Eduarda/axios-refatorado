@@ -2,55 +2,142 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Refatoração da Biblioteca Axios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refatoração Axios | Qualidade de Software</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; color: #333; }
-    h1, h2 { color: #0a4d8c; }
-    pre { background: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow-x: auto; }
-    code { background: #eef; padding: 2px 4px; }
-    .box { border-left: 4px solid #0a4d8c; padding-left: 16px; margin: 20px 0; background: #f9f9f9; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #0a4d8c;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    main {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    h1, h2 {
+      color: #0a4d8c;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .highlight {
+      background: #e0f3ff;
+      padding: 10px 20px;
+      border-left: 5px solid #0a4d8c;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      padding: 20px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
-  <h1>Refatoração da Biblioteca Axios</h1>
-  <p><strong>Projeto Acadêmico - Qualidade de Software e Governança</strong></p>
+  <header>
+    <h1>Refatoração da Biblioteca Axios</h1>
+    <p>Projeto Acadêmico - Qualidade de Software e Governança</p>
+  </header>
+  <main>
+    <section>
+      <h2>🎯 Objetivo</h2>
+      <p>Aplicar análise estática e refatoração de código com foco em legibilidade, desempenho e manutenibilidade, sem alterar seu comportamento funcional.</p>
+    </section>
 
-  <div class="box">
-    <p><strong>Este repositório apresenta a refatoração de um exemplo baseado na biblioteca <code>Axios</code>, com foco na melhoria da qualidade do código por meio de análise estática e boas práticas de desenvolvimento.</strong></p>
-  </div>
+    <section>
+      <h2>🛠️ Melhorias Aplicadas</h2>
+      <ul>
+        <li>Uso de <code>const</code> ao invés de <code>var</code></li>
+        <li>Implementação de <code>async/await</code> para controle assíncrono</li>
+        <li>Tratamento de erros com <code>try/catch</code> mais robusto</li>
+        <li>Separação de responsabilidade e clareza de função</li>
+      </ul>
+    </section>
 
-  <h2>🔍 Objetivo</h2>
-  <p>Aplicar conceitos de análise estática e refatoração em um projeto real para aprimorar:</p>
-  <ul>
-    <li>Manutenibilidade</li>
-    <li>Legibilidade</li>
-    <li>Segurança</li>
-    <li>Desempenho</li>
-  </ul>
+    <section class="highlight">
+      <strong>Antes:</strong>
+      <pre><code>var axios = require('axios');
+function requestData(url) {
+  var result;
+  try {
+    axios.get(url).then(function(response) {
+      result = response.data;
+    });
+  } catch(e) {
+    console.log('Erro na requisição');
+  }
+  return result;
+}</code></pre>
 
-  <h2>🛠️ Melhorias Aplicadas</h2>
-  <ul>
-    <li>Uso de <code>const</code> ao invés de <code>var</code> para imutabilidade</li>
-    <li>Uso de <code>async/await</code> para clareza do fluxo assíncrono</li>
-    <li>Tratamento de exceções mais detalhado com <code>console.error</code></li>
-    <li>Remoção de lógica desnecessária</li>
-  </ul>
+      <strong>Depois:</strong>
+      <pre><code>const axios = require('axios');
 
-  <h2>📁 Estrutura do Projeto</h2>
-  <pre><code>axios-refatorado/
-├── original.js       # Versão com más práticas
-├── refatorado.js     # Código com melhorias aplicadas
-└── index.html        # Página inicial para GitHub Pages
+async function requestData(url) {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Erro na requisição:', error.message);
+    return null;
+  }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>📁 Estrutura do Projeto</h2>
+      <pre><code>axios-refatorado/
+├── original.js       # Código original
+├── refatorado.js     # Código com melhorias
+└── index.html        # Página para GitHub Pages
 </code></pre>
+    </section>
 
-  <h2>🚀 Como Executar</h2>
-  <pre><code>git clone https://github.com/MariaEduarda/axios-refatorado.git
+    <section>
+      <h2>🚀 Como Executar</h2>
+      <pre><code>git clone https://github.com/MariaEduarda/axios-refatorado.git
 cd axios-refatorado
 node refatorado.js</code></pre>
+    </section>
 
-  <p>Ou visualize a refatoração diretamente aqui nesta página.</p>
-
-  <hr>
-  <p><em>Desenvolvido por Maria Eduarda • 2025</em></p>
+    <section>
+      <h2>🌐 Como Publicar no GitHub Pages</h2>
+      <ol>
+        <li>Abra seu repositório no GitHub</li>
+        <li>Vá em <strong>Settings</strong> &gt; <strong>Pages</strong></li>
+        <li>Na seção <strong>Source</strong>, selecione:
+          <ul>
+            <li><strong>Branch:</strong> <code>main</code></li>
+            <li><strong>Folder:</strong> <code>/ (root)</code></li>
+          </ul>
+        </li>
+        <li>Clique em <strong>Save</strong></li>
+        <li>Após alguns segundos, o link do seu site estará disponível na mesma tela!</li>
+      </ol>
+    </section>
+  </main>
+  <footer>
+    Desenvolvido por Maria Eduarda • 2025
+  </footer>
 </body>
 </html>
